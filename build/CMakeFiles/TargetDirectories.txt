@@ -1,4 +1,0 @@
-/mnt/c/Users/kanow/Documents/programowanie/algebraic_god/build/CMakeFiles/algebraic_god.dir
-/mnt/c/Users/kanow/Documents/programowanie/algebraic_god/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/kanow/Documents/programowanie/algebraic_god/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/kanow/Documents/programowanie/algebraic_god/build/CMakeFiles/algebraic_god_autogen.dir
