@@ -29,19 +29,32 @@ std::vector<std::vector<float>> MatrixEdit::getMatrixToVec() {
     std::vector<std::vector<float>> matrixVec;
     QStringList matrixSplitLines = qStringMatrix.split("\n");
 
-    for (QString line: matrixSplitLines) {
+    for (QString line: matrixSplitLines) 
+    {
         QStringList lineElems = line.split(' ', Qt::SkipEmptyParts);
         std::vector<float> lineElemsFloat;
-        for (QString str: lineElems) {
+
+        for (QString str: lineElems) 
+        {
             lineElemsFloat.push_back(std::stof(str.toStdString()));
         }
         matrixVec.push_back(lineElemsFloat);
     }
-    
+
     return matrixVec;
 }
 
 void MatrixEdit::callDetCalc() {
     std::vector<std::vector<float>> matrix = getMatrixToVec();
-    float det = determinantCalc(matrix);
+
+    // adding zeros, if a row is shorter than other
+    for (auto line: matrix)
+    {
+        while (line.size() < matrix.size())
+        {
+            line.push_back(0);
+        }
+    }
+
+    float det = matrixDet(matrix);
 }

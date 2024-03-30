@@ -4,4 +4,10 @@
 
 #include <vector>
 
-float determinantCalc(std::vector<std::vector<float>>);
+struct LUPair;
+
+float matrixDet(std::vector<std::vector<float>>);
+
+void pivot(std::vector<std::vector<float>>&, const uint);
+
+LUPair LUdec(std::vector<std::vector<float>>); 
