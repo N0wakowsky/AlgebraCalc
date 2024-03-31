@@ -1,10 +1,7 @@
 #include "matrixedit.hpp"
 #include "matrixcalc.hpp"
+#include "matrix.hpp"
 
-#include <QTextStream>
-#include <QTextEdit>
-#include <QPushButton>
-#include <QString>
 #include <QLayout>
 
 #include <vector>
@@ -57,4 +54,7 @@ void MatrixEdit::callDetCalc() {
     }
 
     float det = matrixDet(matrix);
+
+    // undefined reference to resultDisp
+    Matrix::setResult(det);
 }

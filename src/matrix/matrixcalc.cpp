@@ -1,7 +1,6 @@
 #include "matrixcalc.hpp"
 
 #include <vector>
-#include <iostream>
 
 struct LUPair
 {

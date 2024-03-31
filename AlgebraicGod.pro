@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = AlgebraicGod
-INCLUDEPATH += . ./include ./include/matrix
+INCLUDEPATH += . ./include ./include/matrix ./src ./src/matrix
 QT += widgets gui core printsupport
 
 # Input

@@ -1,11 +1,8 @@
 #pragma once
 #include "matrixedit.hpp"
+#include "matrix.hpp"
 
 #include <QTextEdit>
-#include <QLineEdit>
-#include <QWidget>
-#include <QString>
-#include <QGroupBox>
 
 class MatrixEdit : public QWidget {
     Q_OBJECT

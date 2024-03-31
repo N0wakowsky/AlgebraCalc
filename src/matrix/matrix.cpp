@@ -1,8 +1,6 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <QGroupBox>
-#include <QLabel>
 
 #include "matrix.hpp"
 #include "matrixedit.hpp"
@@ -17,9 +15,9 @@ Matrix::Matrix(QWidget *parent) : QWidget(parent) {
     matrixCalcLayout->addWidget(matrixALayout, 0, 0);
     matrixCalcLayout->addWidget(matrixBLayout, 0, 1);
 
-    _result = new QLabel("result", this);
+    resultDisp = new QLabel("", this);
 
-    matrixCalcLayout->addWidget(_result, 1, 1);
+    matrixCalcLayout->addWidget(resultDisp, 1, 1);
     
     setLayout(matrixCalcLayout);
 }  
