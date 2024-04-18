@@ -3,13 +3,13 @@
 
 #include <QTextStream>
 
-#include "matrix.hpp"
+#include "matrixlayout.hpp"
 
 int main(int argc, char **argv) 
 {
     QApplication app(argc, argv);
 
-    Matrix window;
+    MatrixLayout window;
     window.setWindowTitle("Matrix calc");
     window.show();
 
