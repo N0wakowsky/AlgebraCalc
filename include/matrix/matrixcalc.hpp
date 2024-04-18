@@ -4,10 +4,21 @@
 
 #include <vector>
 
+typedef std::vector<std::vector<float>> matrixType;
+
 struct LUPair;
 
-float matrixDet(std::vector<std::vector<float>>);
+namespace matcalc
+{
+    float matrixDet(matrixType);
 
-void pivot(std::vector<std::vector<float>>&, const uint);
+    void pivot(matrixType&, const int);
 
-LUPair LUdec(std::vector<std::vector<float>>); 
+    LUPair LUdec(matrixType); 
+
+    matrixType matrixMul(matrixType, matrixType);
+
+    matrixType gaussElim(matrixType);
+
+    int matrixRank(matrixType);
+}
