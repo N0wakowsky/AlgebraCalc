@@ -1,37 +1,38 @@
-#include "matrixedit.hpp"
 #include "matrixcalc.hpp"
-#include "matrix.hpp"
 
 #include <QLayout>
 
 #include <vector>
-#include <iostream>
+#include <string>
 
-MatrixEdit::MatrixEdit(QWidget *parent) : QWidget(parent){
+MatrixEdit::MatrixEdit(QWidget *parent) : QWidget(parent)
+{
     QGridLayout *layout = new QGridLayout();
 
-    _matrixEdit = new QTextEdit(QString("Type matrix")); 
-    layout->addWidget(_matrixEdit);
-    
+    textMatrix = new QTextEdit(QString("Type matrix"));
+    layout->addWidget(textMatrix);
+
     setLayout(layout);
 }
 
-QString MatrixEdit::getMatrixFromTextEdit() {   
-    return _matrixEdit->toPlainText();
+QString MatrixEdit::getMatrixFromTextEdit()
+{
+    return textMatrix->toPlainText();
 }
 
-std::vector<std::vector<float>> MatrixEdit::getMatrixToVec() {
+matrixType MatrixEdit::getMatrixToVec()
+{
     QString qStringMatrix = getMatrixFromTextEdit();
 
-    std::vector<std::vector<float>> matrixVec;
+    matrixType matrixVec;
     QStringList matrixSplitLines = qStringMatrix.split("\n");
 
-    for (QString line: matrixSplitLines) 
+    for (QString line : matrixSplitLines)
     {
         QStringList lineElems = line.split(' ', Qt::SkipEmptyParts);
         std::vector<float> lineElemsFloat;
 
-        for (QString str: lineElems) 
+        for (QString str : lineElems)
         {
             lineElemsFloat.push_back(std::stof(str.toStdString()));
         }
@@ -39,22 +40,4 @@ std::vector<std::vector<float>> MatrixEdit::getMatrixToVec() {
     }
 
     return matrixVec;
-}
-
-void MatrixEdit::callDetCalc() {
-    std::vector<std::vector<float>> matrix = getMatrixToVec();
-
-    // adding zeros, if a row is shorter than other
-    for (auto line: matrix)
-    {
-        while (line.size() < matrix.size())
-        {
-            line.push_back(0);
-        }
-    }
-
-    float det = matrixDet(matrix);
-
-    // undefined reference to resultDisp
-    Matrix::setResult(det);
 }
