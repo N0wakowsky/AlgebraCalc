@@ -41,3 +41,20 @@ matrixType MatrixEdit::getMatrixToVec()
 
     return matrixVec;
 }
+
+QString MatrixEdit::getMatrixToQString(matrixType matrix)
+{   
+    QString qStrMat;
+
+    for (auto row: matrix)
+    {
+        for (auto i: row)
+        {
+            qStrMat.append(QString::number(i));
+            qStrMat.append(' ');
+        }
+        qStrMat.append('\n');
+    }
+
+    return qStrMat;
+}

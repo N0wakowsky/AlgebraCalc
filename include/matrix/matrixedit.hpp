@@ -5,12 +5,15 @@
 
 #include <QTextEdit>
 
+typedef std::vector<std::vector<float>> matrixType;
+
 class MatrixEdit : public QWidget {
     Q_OBJECT
 
 public:
     MatrixEdit(QWidget *parent = nullptr);
-    std::vector<std::vector<float>> getMatrixToVec();
+    matrixType getMatrixToVec();
+    static QString getMatrixToQString(matrixType);
         
 private:
     QString getMatrixFromTextEdit();
