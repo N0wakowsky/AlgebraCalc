@@ -1,6 +1,7 @@
 #pragma once
 
 #include "matrixedit.hpp"
+#include <exception>
 
 #include <vector>
 
@@ -12,7 +13,7 @@ namespace matcalc
 {
     float matrixDet(matrixType);
 
-    void pivot(matrixType&, const int);
+    void pivot(matrixType &, const int);
 
     LUPair LUdec(matrixType); 
 
@@ -21,4 +22,8 @@ namespace matcalc
     matrixType gaussElim(matrixType);
 
     int matrixRank(matrixType);
+
+    matrixType matrixTranspose(matrixType);
+
+    void repairMatrix(matrixType &);
 }

@@ -63,7 +63,19 @@ LUPair matcalc::LUdec(matrixType matrix)
 }
 
 float matcalc::matrixDet(matrixType matrix)
-{
+{   
+    uint len = 0;
+    for (auto row: matrix)
+    {
+        if (row.size() > len)
+            len = row.size();
+    }
+
+    if (matrix.size() != len)
+        throw std::string("Matrix is not a square matrix");
+
+    matcalc::repairMatrix(matrix);
+
     LUPair LUdecomposition = LUdec(matrix);
     matrixType matrixU = LUdecomposition.U;
     int sign = LUdecomposition.sign;
@@ -104,6 +116,8 @@ matrixType matcalc::matrixMul(matrixType matrixA, matrixType matrixB)
 
 matrixType matcalc::gaussElim(matrixType matrix)
 {
+    repairMatrix(matrix);
+
     uint matSize = matrix.size();
 
     for (uint col = 0; col < matSize - 1; col++)
@@ -140,4 +154,39 @@ int matcalc::matrixRank(matrixType matrix)
             rank++;
     }
     return rank;
+}
+
+matrixType matcalc::matrixTranspose(matrixType matrix)
+{
+    matrixType transpMat(matrix[0].size(), std::vector<float>(matrix.size(), 0));
+
+    for (uint i = 0; i < transpMat.size(); i++)
+    {
+        for (uint j = 0; j < transpMat[0].size(); j++)
+        {
+            transpMat[i][j] = matrix[j][i];
+        }
+    }
+    
+    return transpMat;
+}
+
+void matcalc::repairMatrix(matrixType &matrix)
+{
+    uint len = 0;
+
+    for (auto row: matrix)
+    {
+        uint rowLen = row.size();
+        if (rowLen > len)
+            len = rowLen;
+    }
+
+    for (auto &row: matrix)
+    {
+        while (row.size() < len)
+        {
+            row.push_back(0.f);
+        }   
+    }
 }
