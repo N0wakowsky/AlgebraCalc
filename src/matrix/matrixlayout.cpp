@@ -6,8 +6,6 @@
 #include "matrixedit.hpp"
 #include "matrixcalc.hpp"
 
-#include <iostream>
-
 
 MatrixLayout::MatrixLayout(QWidget *parent) : QWidget(parent) 
 {   
@@ -70,31 +68,80 @@ MatrixLayout::MatrixLayout(QWidget *parent) : QWidget(parent)
  
 void MatrixLayout::calcDetA()
 {   
-    matrixType matA = matrixAEdit->getMatrixToVec();
-    float detA = matcalc::matrixDet(matA);
-    resultDisp->setText(QString::number(detA));
+    try
+    {
+        matrixType matA = matrixAEdit->getMatrixToVec();
+        float detA = matcalc::matrixDet(matA);
+        resultDisp->setText(QString::number(detA));
+    }
+    catch (const std::string &e)
+    {
+        resultDisp->setText(QString::fromStdString(e));
+    }
+    catch (const std::invalid_argument &e)
+    {
+        resultDisp->setText(QString("Incorrect input data"));
+    }
 }
 
 void MatrixLayout::calcDetB()
 {
-    matrixType matB = matrixBEdit->getMatrixToVec();
-    float detB = matcalc::matrixDet(matB);
-    resultDisp->setText(QString::number(detB));
+    try
+    {
+        matrixType matB = matrixBEdit->getMatrixToVec();
+        float detB = matcalc::matrixDet(matB);
+        resultDisp->setText(QString::number(detB));
+    }
+    catch (const std::string &e)
+    {
+        resultDisp->setText(QString::fromStdString(e));
+    }
+    catch (const std::invalid_argument &e)
+    {
+        resultDisp->setText(QString("Incorrect input data"));
+    }
 }
 
 void MatrixLayout::calcRankA()
 {
-    matrixType matA = matrixAEdit->getMatrixToVec();
-    int rankA = matcalc::matrixRank(matA);
-    std::cout << rankA << std::endl;
-    resultDisp->setText(QString::number(rankA));
+    try
+    {
+        matrixType matA = matrixAEdit->getMatrixToVec();
+        if (matA.size() == 0)
+            throw std::string("No given matrix");
+
+        int rankA = matcalc::matrixRank(matA);
+        resultDisp->setText(QString::number(rankA));
+    }
+    catch (const std::invalid_argument &e)
+    {
+        resultDisp->setText(QString("Incorrect input data"));
+    }
+    catch (const std::string &e)
+    {
+        resultDisp->setText(QString::fromStdString(e));
+    }
 }
 
 void MatrixLayout::calcRankB()
 {
-    matrixType matB = matrixBEdit->getMatrixToVec();
-    int rankB = matcalc::matrixRank(matB);
-    resultDisp->setText(QString::number(rankB));
+    try
+    {
+        matrixType matB = matrixBEdit->getMatrixToVec();
+        if (matB.size() == 0)
+            throw std::string("No given matrix");
+            
+        int rankB = matcalc::matrixRank(matB);
+        resultDisp->setText(QString::number(rankB));
+    }
+    catch (const std::invalid_argument &e)
+    {
+        resultDisp->setText(QString("Incorrect input data"));
+    }
+    catch (const std::string &e)
+    {
+        resultDisp->setText(QString::fromStdString(e));
+    }
 }
 
 void MatrixLayout::calcInvA()
@@ -109,10 +156,16 @@ void MatrixLayout::calcInvB()
 
 void MatrixLayout::calcTranspA()
 {
-
+    matrixType matA = matrixAEdit->getMatrixToVec();
+    matrixType matAT = matcalc::matrixTranspose(matA);
+    QString QStrMatAT = MatrixEdit::getMatrixToQString(matAT);
+    resultDisp->setText(QStrMatAT);
 }
 
 void MatrixLayout::calcTranspB()
 {
-
+    matrixType matB = matrixBEdit->getMatrixToVec();
+    matrixType matBT = matcalc::matrixTranspose(matB);
+    QString QStrMatBT = MatrixEdit::getMatrixToQString(matBT);
+    resultDisp->setText(QStrMatBT);
 }
